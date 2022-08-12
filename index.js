@@ -702,7 +702,7 @@ client.on("guildMemberAdd", async (member) => {
     let messages = await channel.messages.fetch({ limit: 10 }).then(messages => messages.filter(x => x.content == `${member.user.username}#${member.user.discriminator}`))
     let image = messages.first().attachments.first().url
     let embed = new MessageEmbed()
-      .setDescription(`**Welcome to Kaisen**, we hope you enjoy your time with us! <:EggYuuji:846830987295457310> /nꕤ <#846520914094850070> /nꕤ <#846520939772772392> /nꕤ <#846153719351083009> /nꕤ <#846700402430181386> /nꕤ <#1001421106755936256> /n/n**ALSO! don’t forget to open your pack at <#1004888849903788032>!**`)
+      .setDescription(`**Welcome to Kaisen**, we hope you enjoy your time with us! <:EggYuuji:846830987295457310>/n/n ꕤ <#846520914094850070>/n/n ꕤ <#846520939772772392>/n/n ꕤ <#846153719351083009>/n/n ꕤ <#846700402430181386>/n/n ꕤ <#1001421106755936256> /n/n/n**ALSO! don’t forget to open your pack at <#1004888849903788032>!**`)
       .setImage(image)
       .setColor('#386DAE')
       .setTitle(`Welcome, ${member.user.username}!`)
