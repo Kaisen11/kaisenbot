@@ -696,7 +696,7 @@ client.on("messageCreate", async (message) => {
 })
 
 client.on("guildMemberUpdate", async (oldMember, newMember) => {
-  if (newMember.roles.cache.find(x => x.id == "846503022682964001")) {
+  if (newMember.roles.cache.find(x => x.id == "846503022682964001") && !oldMember.roles.cache.find(x => x.id == "846503022682964001")) {
     try {
 	const channel = client.channels.cache.get('897871534130090055')
 	let messages = await channel.messages.fetch().then(messages => messages.filter(x => x.content == `${newMember.user.username}#${newMember.user.discriminator}`))
