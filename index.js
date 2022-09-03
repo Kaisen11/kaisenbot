@@ -300,8 +300,32 @@ client.on("interactionCreate", async (interaction) => {
               interaction.channel.send({
                 content: 'Have Fun!'
               })
+	      const membersname = interaction.user.username
+	      interaction.update({
+	      	components: [new MessageActionRow().addComponents(
+                  new MessageButton()
+                    .setLabel('Alright, I\'m Done')
+                    .setStyle('SUCCESS')
+                    .setCustomId('done')
+		    .setDisabled()
+                )]
+	      })
               let chanee = guild.channels.cache.get('903770449740181554')
               chanee.permissionOverwrites.delete(intmember.id)
+	      try {
+		const koyachannel = client.channels.cache.get('897871534130090055')
+		let messages = await koyachannel.messages.fetch().then(messages => messages.filter(x => x.content == `${newMember.user.username}#${newMember.user.discriminator}`))
+		let image = messages.first().attachments.first().url
+		let welcembed = new MessageEmbed()
+		  .setDescription(`**Welcome to Kaisen**, we hope you enjoy your time with us! <:EggYuuji:846830987295457310>\n\n ꕤ <#846520914094850070>\n\n ꕤ <#846520939772772392>\n\n ꕤ <#846153719351083009>\n\n ꕤ <#846700402430181386>\n\n ꕤ <#1001421106755936256> \n\n\n**ALSO! don’t forget to open your pack at <#1004888849903788032>!**`)
+		  .setImage(image)
+		  .setColor('#386DAE')
+		  .setTitle(`Welcome, ${membersname.user.username}!`)
+		const welc = client.channels.cache.get('906088560422166528')
+		welc.send({ content: '<@&852975435704959025>', embeds: [welcembed] })
+	    } catch(err) {
+		console.log(err)
+	    }
             }
             if (interaction.customId === 'dmsopened') {
               let is;
@@ -695,24 +719,7 @@ client.on("messageCreate", async (message) => {
   }
 })
 
-client.on("guildMemberUpdate", async (oldMember, newMember) => {
-  if (newMember.roles.cache.find(x => x.id == "846503022682964001") && !oldMember.roles.cache.find(x => x.id == "846503022682964001")) {
-    try {
-	const channel = client.channels.cache.get('897871534130090055')
-	let messages = await channel.messages.fetch().then(messages => messages.filter(x => x.content == `${newMember.user.username}#${newMember.user.discriminator}`))
-	let image = messages.first().attachments.first().url
-	let embed = new MessageEmbed()
-	  .setDescription(`**Welcome to Kaisen**, we hope you enjoy your time with us! <:EggYuuji:846830987295457310>\n\n ꕤ <#846520914094850070>\n\n ꕤ <#846520939772772392>\n\n ꕤ <#846153719351083009>\n\n ꕤ <#846700402430181386>\n\n ꕤ <#1001421106755936256> \n\n\n**ALSO! don’t forget to open your pack at <#1004888849903788032>!**`)
-	  .setImage(image)
-	  .setColor('#386DAE')
-	  .setTitle(`Welcome, ${newMember.user.username}!`)
-	const welc = client.channels.cache.get('906088560422166528')
-	welc.send({ content: '<@&852975435704959025>', embeds: [embed] })
-    } catch(err) {
-        console.log(err)
-    }
-  }
-})
+
 
 client.on("guildMemberAdd", async (member) => {
   const channel = client.channels.cache.get('903770449740181554')
