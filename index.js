@@ -294,7 +294,6 @@ client.on("interactionCreate", async (interaction) => {
               })
             }
             if (interaction.customId === 'done') {
-              interaction.deferUpdate()
               const mero = guild.roles.cache.get('846503022682964001')
               intmember.roles.add(mero)
               interaction.channel.send({
